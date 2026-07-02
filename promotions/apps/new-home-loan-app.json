@@ -1,10 +1,10 @@
 {
   "schema_version": 1,
   "kind": "app",
-  "app_name": "new_home_loan_app",
+  "app_name": "dev_home_loan_app",
   "version": 1,
   "definition": {
-    "app_name": "new_home_loan_app",
+    "app_name": "dev_home_loan_app",
     "workflow": {
       "name": "root_flow",
       "type": "SequentialAgent",
