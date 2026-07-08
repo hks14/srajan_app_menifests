@@ -1,0 +1,71 @@
+{
+  "schema_version": 1,
+  "kind": "app",
+  "app_name": "hks_home_loan_app",
+  "version": 1,
+  "definition": {
+    "app_name": "hks_home_loan_app",
+    "workflow": {
+      "name": "root_flow",
+      "type": "SequentialAgent",
+      "sub_agents": [
+        {
+          "agent": {
+            "name": "RouterFlow",
+            "type": "RouterAgent",
+            "model": "local-gemma3",
+            "sub_agents": [
+              {
+                "agent": {
+                  "name": "IT_Certificate_Agent",
+                  "type": "LlmAgent",
+                  "model": "local-gemma3",
+                  "tools": [
+                    {
+                      "ref": "Home_Loan_Auth_MCP",
+                      "tool_filter": [
+                        "get_it_certificate"
+                      ]
+                    }
+                  ],
+                  "description": "Handle IT Certificate requests for HDFC Home Loans",
+                  "instruction": "You are responsible to serve the user queries related to IT Certificate for HDFC Home Loans.\nYou handle ONLY the intent: IT_CERTIFICATE\n\n---\n\n## Trigger Phrases\n\n\"IT certificate\"\n\"tax certificate\"\n\"interest paid\"\n\"80C\"\n\"24B\"\n\"interest statement\"\n\"provide it certificate\"\n\"generate it certificate\"\n\n---\n\n## Workflow\n\n1. Validate required parameters: loan_account_number (account_number), contact_no, financial_year (optional)\n2. If missing → Ask for the missing parameters using the missing information response.\n3. If present → call tool \"get_it_certificate\".\n4. Return RAW tool response only.\n\n---\n\n## Rules\n\n- NO formatting.\n- NO email generation.\n- NO markdown.\n- Output ONLY tool response.\n"
+                }
+              },
+              {
+                "agent": {
+                  "name": "loan_statemen_agent",
+                  "type": "LlmAgent",
+                  "model": "local-gemma3",
+                  "tools": [
+                    {
+                      "ref": "Home_Loan_Auth_MCP",
+                      "tool_filter": [
+                        "get_loan_statement"
+                      ]
+                    }
+                  ],
+                  "description": "An intelligent agent to generate the loan statement as per provided details",
+                  "instruction": "You are responsible to serve the user queries related to Loan Statement for HDFC Home Loans.\nYou handle ONLY the intent:\n- STATEMENT\n---\n\n## Trigger Phrases\n\n\"statement\"  \n\"account statement\"  \n\"loan statement\"  \n\"transaction history\"\n\n---\n\n## Workflow\n\n1. Validate required parameters: account_number, contact_no, financial_year (optional)\n2. If missing → Ask for the missing parameters using the missing information response.\n3. If present → call tool \"get_loan_statement\".\n4. Return RAW tool response only.\n\n## Rules\n\n- NO email formatting.\n- NO markdown.\n- NO assumptions.\n- Output only tool response JSON.\n\n**If Required Parameters Are Missing:**\n- Do NOT call the tool\n- Generate email requesting missing information\n- Clearly specify which parameters are needed\n- Use friendly, helpful tone\n\n**Example Missing Parameter Response:**\n```\nDear Valued Customer,\n\nTo process your request for [Trigger Phrase], we need the following information:\n\n**Missing Information:**\n- Loan Account Number: [Not Provided]\n- Contact Number: [Not Provided]\n\nPlease provide these details so we can assist you promptly.\n\nThank You,  \nHousing Loan Support Team\n```\n"
+                }
+              }
+            ],
+            "description": "Intent-based router — invokes only the matching sub-agent(s)",
+            "instruction": "You are an intelligent router agent.\n\nYour ONLY responsibility is to analyse the user query, determine which sub-agent is best suited to handle it based on each sub-agent's description, and delegate the request to that sub-agent.\n\nRules:\n- Invoke ONE sub-agent per detected intent.\n- If the query contains multiple independent intents, invoke one sub-agent per intent.\n- Do NOT answer the user directly — always delegate to a sub-agent.\n- Do NOT invoke sub-agents whose descriptions do not match the query.\n- The sub-agent's `description` field is your routing signal.\n- If no sub-agent matches, respond with a polite clarification request."
+          }
+        }
+      ]
+    },
+    "app_model": "local-gemma3",
+    "temperature": 0
+  },
+  "tool_refs": [
+    "Home_Loan_Auth_MCP"
+  ],
+  "memory_refs": {},
+  "model_refs": [
+    "local-gemma3"
+  ],
+  "llm_provider_ref": "local-gemma3",
+  "publish_intent": true
+}
