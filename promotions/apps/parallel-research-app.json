@@ -13,7 +13,7 @@
           "agent": {
             "name": "understand_research_topic",
             "type": "LlmAgent",
-            "model": "local-gemma3",
+            "model": "local-qwen3",
             "tools": [],
             "description": "An intelligent agent to understand the user query and figure out the topic of research.",
             "instruction": "An intelligent agent to analyze the user query and understand the topic for research. and set it to output key."
@@ -23,13 +23,13 @@
           "agent": {
             "name": "ParallelFlow",
             "type": "ParallelAgent",
-            "model": "local-gemma3",
+            "model": "local-qwen3",
             "sub_agents": [
               {
                 "agent": {
                   "name": "env_research",
                   "type": "LlmAgent",
-                  "model": "local-gemma3",
+                  "model": "local-qwen3",
                   "tools": [],
                   "description": "An agent to do environmental research on given topic.",
                   "instruction": "Goal: your goal is to do a environmental research on a given topic and generate the report of the findings.\n\nInput: You will receive a topic {research_topic} and the do the research around this.\n\nWorkflow: \n1. Get the topic, do not assume or hallucinate the topic.\n2. Do the research on the environmental impact perspective.\n3. Generate the report in below format:\n\n*Topic*\n\n*Impact*\n\n*Remedies*\n\n*Solution*"
@@ -39,7 +39,7 @@
                 "agent": {
                   "name": "finanacial_research",
                   "type": "LlmAgent",
-                  "model": "local-gemma3",
+                  "model": "local-qwen3",
                   "tools": [],
                   "description": "An agent to do the financial research on given topic",
                   "instruction": "Goal: your goal is to do a financial research on a given topic and generate the report of the findings.\n\nInput: You will receive a topic {research_topic} and the do the research around this.\n\nWorkflow: \n1. Get the topic, do not assume or hallucinate the topic.\n2. Do the research on the financial impact perspective.\n3. Generate the report in below format:\n\n*Topic*\n\n*Impact*\n\n*Remedies*\n\n*Solution*"
@@ -53,7 +53,7 @@
           "agent": {
             "name": "merge_research",
             "type": "LlmAgent",
-            "model": "local-gemma3",
+            "model": "local-qwen3",
             "tools": [],
             "description": "An agent to merge the result from the previous steps",
             "instruction": "Goal: Merge the research out put from the previous steps.\n\nGenerte the report in below format\n\n* {research_topic}*\n\n**Environmental Research**\n{env_research_output_key}\n\n\n** Financial Research**\n{finanacial_research}"
@@ -61,14 +61,14 @@
         }
       ]
     },
-    "app_model": "local-gemma3",
+    "app_model": "local-qwen3",
     "temperature": 0
   },
   "tool_refs": [],
   "memory_refs": {},
   "model_refs": [
-    "local-gemma3"
+    "local-qwen3"
   ],
-  "llm_provider_ref": "local-gemma3",
+  "llm_provider_ref": "local-qwen3",
   "publish_intent": true
 }
