@@ -22,7 +22,7 @@
                   "model": "local-gemma3",
                   "tools": [
                     {
-                      "ref": "Home_Loan_Auth_MCP",
+                      "ref": "home_loan_auth_mcp",
                       "tool_filter": [
                         "get_it_certificate"
                       ]
@@ -39,7 +39,7 @@
                   "model": "local-gemma3",
                   "tools": [
                     {
-                      "ref": "Home_Loan_Auth_MCP",
+                      "ref": "home_loan_auth_mcp",
                       "tool_filter": [
                         "get_loan_statement"
                       ]
@@ -60,7 +60,7 @@
     "temperature": 0
   },
   "tool_refs": [
-    "Home_Loan_Auth_MCP"
+    "home_loan_auth_mcp"
   ],
   "memory_refs": {},
   "model_refs": [
