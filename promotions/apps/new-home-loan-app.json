@@ -13,13 +13,13 @@
           "agent": {
             "name": "RouterFlow",
             "type": "RouterAgent",
-            "model": "local-gemma3",
+            "model": "local-qwen3",
             "sub_agents": [
               {
                 "agent": {
                   "name": "IT_Certificate_Agent",
                   "type": "LlmAgent",
-                  "model": "local-gemma3",
+                  "model": "local-qwen3",
                   "tools": [
                     {
                       "ref": "home_loan_auth_mcp",
@@ -36,7 +36,7 @@
                 "agent": {
                   "name": "loan_statemen_agent",
                   "type": "LlmAgent",
-                  "model": "local-gemma3",
+                  "model": "local-qwen3",
                   "tools": [
                     {
                       "ref": "home_loan_auth_mcp",
@@ -56,7 +56,7 @@
         }
       ]
     },
-    "app_model": "local-gemma3",
+    "app_model": "local-qwen3",
     "temperature": 0
   },
   "tool_refs": [
@@ -64,8 +64,8 @@
   ],
   "memory_refs": {},
   "model_refs": [
-    "local-gemma3"
+    "local-qwen3"
   ],
-  "llm_provider_ref": "local-gemma3",
+  "llm_provider_ref": "local-qwen3",
   "publish_intent": true
 }
