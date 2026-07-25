@@ -1,0 +1,34 @@
+{
+  "schema_version": 1,
+  "kind": "app",
+  "app_name": "test_qna_app",
+  "version": 1,
+  "definition": {
+    "app_name": "test_qna_app",
+    "workflow": {
+      "name": "root_flow",
+      "type": "SequentialAgent",
+      "sub_agents": [
+        {
+          "agent": {
+            "name": "test_agent",
+            "type": "LlmAgent",
+            "model": "local-gemma",
+            "tools": [],
+            "description": "Intelligent QnA agent",
+            "instruction": "Simple agent to answer questions on the financial matters.\nDo not answer any other kind of queries."
+          }
+        }
+      ]
+    },
+    "app_model": "local-gemma",
+    "temperature": 0
+  },
+  "tool_refs": [],
+  "memory_refs": {},
+  "model_refs": [
+    "local-gemma"
+  ],
+  "llm_provider_ref": "local-gemma",
+  "publish_intent": true
+}
